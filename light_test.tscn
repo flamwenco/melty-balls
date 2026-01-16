@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://nvvv4fxxc8v5"]
+
+[ext_resource type="Texture2D" uid="uid://6qwxex0girf3" path="res://icon.svg" id="1_t3bjo"]
+[ext_resource type="Script" uid="uid://blyr22826aydm" path="res://lil_guy.gd" id="2_ltf8m"]
+[ext_resource type="Script" uid="uid://cmfdqd267xvxg" path="res://light_detector.gd" id="3_5weg2"]
+
+[sub_resource type="Gradient" id="Gradient_t3bjo"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dbui6"]
+gradient = SubResource("Gradient_t3bjo")
+
+[sub_resource type="Gradient" id="Gradient_lo3bl"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t3bjo"]
+gradient = SubResource("Gradient_lo3bl")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ltf8m"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltf8m"]
+size = Vector2(64, 64)
+
+[node name="LightTest" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576.0001, 326.53125)
+scale = Vector2(4.5000005, 653.06244)
+texture = SubResource("GradientTexture1D_dbui6")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Background"]
+position = Vector2(-128.00002, -0.50000006)
+scale = Vector2(0.22222221, 0.0015312475)
+color = Color(0, 0.77566147, 0.7785565, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(576, 320.00003)
+scale = Vector2(10, 10)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_t3bjo")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(560, 432)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Area2D"]
+occluder = SubResource("OccluderPolygon2D_ltf8m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ltf8m")
+
+[node name="LilGuy" type="Sprite2D" parent="."]
+position = Vector2(544, 544)
+scale = Vector2(0.5, 0.5000001)
+texture = ExtResource("1_t3bjo")
+script = ExtResource("2_ltf8m")
+
+[node name="LightDetector" type="RayCast2D" parent="LilGuy" node_paths=PackedStringArray("light")]
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("3_5weg2")
+light = NodePath("../../PointLight2D")
+metadata/_custom_type_script = "uid://cmfdqd267xvxg"
+
+[node name="DebugLine" type="Line2D" parent="LilGuy/LightDetector"]
+default_color = Color(2.23808e-06, 0.49013478, 0, 1)
