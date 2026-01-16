@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7o1t4l0sfnfd"]
+
+[ext_resource type="Texture2D" uid="uid://dfk8ielw3cgwd" path="res://Assets/Sprites/lilguys/lil-guys1.png" id="1_nwhps"]
+[ext_resource type="Texture2D" uid="uid://sba0io5whqlq" path="res://Assets/Sprites/lilguys/lil-guys2.png" id="2_lrffq"]
+[ext_resource type="Texture2D" uid="uid://bmlb03gva17hk" path="res://Assets/Sprites/lilguys/lil-guys3.png" id="3_k6ukk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvt1s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nwhps")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lrffq")
+}],
+"loop": true,
+"name": &"hitting-wall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_k6ukk")
+}],
+"loop": true,
+"name": &"melting",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w877"]
+size = Vector2(16, 16)
+
+[node name="LilGuys" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rvt1s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7w877")

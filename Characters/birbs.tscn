@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfnclf88rqoqo"]
+
+[ext_resource type="Texture2D" uid="uid://bndp16gqdcg2r" path="res://Assets/Sprites/birbs/birbs1.png" id="1_ewwpq"]
+[ext_resource type="Texture2D" uid="uid://cdiskoaf1ouxo" path="res://Assets/Sprites/birbs/birbs2.png" id="2_7s0rn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_td3ck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ewwpq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7s0rn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xonht"]
+size = Vector2(64, 32)
+
+[node name="Birbs" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_td3ck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xonht")
