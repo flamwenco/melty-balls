@@ -10,15 +10,37 @@ var just_hit_wall : bool #could be used for an animation handler that will set t
 
 var light: PointLight2D
 
+@export var percent_damaged_per_second: float = 15
+
 func _ready():
 	sprite.play("default")
 	direction = 1 #right
 	rotation_speed = 200.0
+	
+	$HealthBar.visible = false
 
 func _process(_delta: float) -> void:
 	if light:
 		light_detector.set_light_position(light.global_position)
-		
+
+	# Add some logic to handle when our lil' guy is melting
+	if not light_detector.is_colliding():
+		$HealthBar.value -= percent_damaged_per_second * _delta
+		$AnimatedSprite2D.play("melting")
+	else:
+		$AnimatedSprite2D.play("default")
+
+	# Display and progress the progress bar
+	if $HealthBar.value < 99:
+		$HealthBar.visible = true
+
+	if $HealthBar.value < 40:
+		$HealthBar.tint_progress = Color(1, 0, 0)
+	elif $HealthBar.value < 70:
+		$HealthBar.tint_progress = Color(1, 1, 0)
+	else:
+		$HealthBar.tint_progress = Color(0, 1, 0)
+
 func _physics_process(_delta : float) -> void:
 	
 	velocity.x = direction * Global.LILGUY_SPEED
