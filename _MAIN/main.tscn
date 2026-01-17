@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://db8ikthn32v3m"]
+[gd_scene load_steps=5 format=3 uid="uid://db8ikthn32v3m"]
 
 [ext_resource type="PackedScene" uid="uid://dgdl3rdft4y75" path="res://UI/ui_mainmenu.tscn" id="1_03sfx"]
 [ext_resource type="Script" uid="uid://bo03ab06mkll5" path="res://_MAIN/main.gd" id="1_usosw"]
 [ext_resource type="Script" uid="uid://bwt840s3khe8j" path="res://_MAIN/scene_manager.gd" id="3_cucgf"]
+[ext_resource type="PackedScene" uid="uid://2a1kyjxlde5y" path="res://UI/ui_pausemenu.tscn" id="4_cucgf"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_usosw")
@@ -11,10 +12,17 @@ script = ExtResource("1_usosw")
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="GameCanvas" type="CanvasLayer" parent="."]
+[node name="UiPauseMenu" parent="." instance=ExtResource("4_cucgf")]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
-[node name="scene_manager" type="Node" parent="GameCanvas"]
+[node name="scene_manager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("3_cucgf")
+
+[node name="GameCanvas" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="GameCanvas"]
 anchors_preset = 15
@@ -22,10 +30,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 stretch_shrink = 5
 
 [node name="SubViewport" type="SubViewport" parent="GameCanvas/SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(384, 216)
+size_2d_override_stretch = true
 render_target_update_mode = 4

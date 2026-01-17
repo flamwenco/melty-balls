@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=7 format=4 uid="uid://m4ihrjrxa1ig"]
 
+[ext_resource type="Script" uid="uid://b7a5p2lnl2eev" path="res://Levels/level_1.gd" id="1_3anf8"]
 [ext_resource type="Texture2D" uid="uid://cw5kx62uakpqr" path="res://Assets/Tilesets/snow-floor-tiles.png" id="1_w77jt"]
-[ext_resource type="PackedScene" uid="uid://c7o1t4l0sfnfd" path="res://Characters/LilGuys.tscn" id="2_fhqol"]
-[ext_resource type="PackedScene" uid="uid://cfnclf88rqoqo" path="res://Characters/birbs.tscn" id="3_iotdp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3anf8"]
 texture = ExtResource("1_w77jt")
@@ -23,12 +22,30 @@ texture = ExtResource("1_w77jt")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3anf8")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w77jt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3anf8"]
+
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_3anf8")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAwAAAAAAAIAAAAAAA0AAAAAAAAAAAABAA0AAAAAAAAAAAACAA0AAAAAAAAAAAADAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAALAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAANAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAAPAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA0AAAAAAAAAAAATAA0AAAAAAAAAAAAUAA0AAAAAAAAAAAAVAA0AAAAAAAAAAAAWAA0AAAAAAAAAAAAXAA0AAAAAAAAAAAAXAAwAAAACAAIAAAAWAAwAAAABAAIAAAAVAAwAAAABAAIAAAAUAAwAAAABAAIAAAATAAwAAAABAAIAAAASAAwAAAABAAIAAAARAAwAAAABAAIAAAAQAAwAAAABAAIAAAAPAAwAAAABAAIAAAAOAAwAAAABAAIAAAANAAwAAAABAAIAAAAMAAwAAAABAAIAAAALAAwAAAABAAIAAAAKAAwAAAABAAIAAAAJAAwAAAABAAIAAAAIAAwAAAABAAIAAAAHAAwAAAABAAIAAAAGAAwAAAABAAIAAAAFAAwAAAABAAIAAAAEAAwAAAABAAIAAAADAAwAAAABAAIAAAACAAwAAAABAAIAAAABAAwAAAABAAIAAAATAAsAAAAAAAEAAAAUAAsAAAABAAEAAAAVAAoAAAABAAAAAAAWAAoAAAACAAAAAAAWAAsAAAACAAEAAAAXAAsAAAAAAAAAAAAXAAoAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAAAAAAYAAwAAAAAAAAAAAAYAA0AAAAAAAAAAAAXAAkAAAAAAAAAAAAXAAgAAAAAAAAAAAAXAAcAAAAAAAAAAAAXAAYAAAAAAAAAAAAXAAUAAAAAAAAAAAAXAAQAAAAAAAAAAAAXAAMAAAAAAAAAAAAXAAIAAAAAAAAAAAAXAAEAAAAAAAAAAAAXAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAYAAEAAAAAAAAAAAAYAAIAAAAAAAAAAAAYAAMAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_fhqol")
 
-[node name="LilGuys" parent="." instance=ExtResource("2_fhqol")]
+[node name="snowball_spawn" type="Marker2D" parent="."]
+position = Vector2(8, 184)
 
-[node name="Birbs" parent="." instance=ExtResource("3_iotdp")]
+[node name="birbs_spawn" type="Marker2D" parent="."]
+position = Vector2(32, 16)
+
+[node name="worldbounds" type="Area2D" parent="."]
+
+[node name="left" type="CollisionShape2D" parent="worldbounds"]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_w77jt")
+
+[node name="right" type="CollisionShape2D" parent="worldbounds"]
+position = Vector2(384, 0)
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_3anf8")

@@ -2,7 +2,8 @@ extends Control
 
 
 func _on_start_button_pressed() -> void:
-	SignalBus.loadLevel.emit(1)
+	Global.Current_Level = 1
+	SignalBus.loadLevel.emit(Global.Current_Level)
 
 
 func _on_quit_button_pressed() -> void:

@@ -1,16 +1,42 @@
 extends Node
 
-@onready var subview := $"../SubViewportContainer/SubViewport"
-@onready var mainmenu := $"../../UiMainmenu"
-@onready var gamecanvas := $".."
-var level : Node
-	
+@onready var subview := $"../GameCanvas/SubViewportContainer/SubViewport"
+@onready var mainmenu := $"../UiMainmenu"
+@onready var gamecanvas := $"../GameCanvas"
+@onready var pausescreen := $"../UiPauseMenu"
+
+var levelNode : Node
+var levelPath : String
+
+#hide main menu ui, show gamecanvas
+#unload any previously loaded level
+#instantiate the level node based on levelnum
+#add as child to our subviewport
+#show the levelNode
+func updateGameState(newState : Global.GameState):
+	Global.Current_GameState = newState
+
 func loadLevel(levelNum : int):
-	#TODO: properly build tree path to level nodes, using this for now to start with just level 1
-	#TODO: how can we build levels at a lower native res of 384x216 then use subview port to scale up x5???
+	SignalBus.updateGameState.emit(Global.GameState.PLAYING)
 	mainmenu.hide()
+	pausescreen.hide()
 	gamecanvas.show()
-	if levelNum == 1:
-		level = load("res://Levels/Level1.tscn").instantiate()
-		subview.add_child(level)
-		level.show()
+	unloadLevel(Global.Current_Level)
+	levelPath = "res://Levels/Level" + str(levelNum) + ".tscn"
+	levelNode = load(levelPath).instantiate()
+	subview.add_child(levelNode)
+	levelNode.show()
+
+#queue_free to unload passed level num from memory
+func unloadLevel(levelToUnload : int):
+	levelPath = "res://Levels/Level" + str(levelToUnload) + ".tscn"
+	levelNode = load(levelPath).instantiate()
+	levelNode.queue_free()
+
+func loadMainMenu():
+	SignalBus.updateGameState.emit(Global.GameState.MAINMENU)
+	if Global.Current_Level:
+		unloadLevel(Global.Current_Level)
+	gamecanvas.hide()
+	pausescreen.hide()
+	mainmenu.show()
