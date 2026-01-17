@@ -42,21 +42,33 @@ jobs:
         run: godot --headless --verbose --export-release "Web" "${{ github.workspace }}/build/web/index.html" ${{ env.PROJECT_PATH }}/project.godot
 
       - name: Build Windows
-        run: godot --headless --verbose --export-release "Windows Desktop" "${{ github.workspace }}/build/windows/game.exe" ${{ env.PROJECT_PATH }}/project.godot
+        run: godot --headless --verbose --export-release "Windows Desktop" "${{ github.workspace }}/build/windows/melty_balls.exe" ${{ env.PROJECT_PATH }}/project.godot
 
       - name: Build Linux
-        run: godot --headless --verbose --export-release "Linux" "${{ github.workspace }}/build/linux/game.x86_64" ${{ env.PROJECT_PATH }}/project.godot
+        run: godot --headless --verbose --export-release "Linux" "${{ github.workspace }}/build/linux/melty_balls.x86_64" ${{ env.PROJECT_PATH }}/project.godot
 
       # DEPLOYMENT STEPS
 
-      - name: Upload Desktop Builds as Artifacts
+      - name: Upload Windows Build
         uses: actions/upload-artifact@v4
         with:
-          name: Desktop-Builds
-          path: build/*
-          # Excludes the web build from the artifact zip to save space, 
-          # since it's being deployed to Pages separately.
-          exclude: build/web 
+          name: Windows-Build
+          path: build/windows
+          retention-days: 1
+
+      - name: Upload Linux Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux-Build
+          path: build/linux
+          retention-days: 1
+          
+      - name: Upload Web Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web-Build
+          path: build/web
+          retention-days: 1
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
