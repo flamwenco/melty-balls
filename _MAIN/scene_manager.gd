@@ -21,22 +21,23 @@ func loadLevel(levelNum : int):
 	mainmenu.hide()
 	pausescreen.hide()
 	gamecanvas.show()
-	unloadLevel(Global.Current_Level)
+	unloadLevel()
 	levelPath = "res://Levels/Level" + str(levelNum) + ".tscn"
 	levelNode = load(levelPath).instantiate()
 	subview.add_child(levelNode)
 	levelNode.show()
 
-#queue_free to unload passed level num from memory
-func unloadLevel(levelToUnload : int):
-	levelPath = "res://Levels/Level" + str(levelToUnload) + ".tscn"
-	levelNode = load(levelPath).instantiate()
-	levelNode.queue_free()
+#unload current levelNode from memory
+func unloadLevel():
+	#verify the node exists and is valid (not already freed)
+	if levelNode != null && is_instance_valid(levelNode):
+		subview.remove_child(levelNode)
+		levelNode.queue_free()
+		await levelNode.tree_exited #verify the unload is finished
 
 func loadMainMenu():
 	SignalBus.updateGameState.emit(Global.GameState.MAINMENU)
-	if Global.Current_Level:
-		unloadLevel(Global.Current_Level)
+	unloadLevel()
 	gamecanvas.hide()
 	pausescreen.hide()
 	mainmenu.show()
