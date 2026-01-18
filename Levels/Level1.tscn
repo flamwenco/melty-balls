@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=12 format=4 uid="uid://m4ihrjrxa1ig"]
 
 [ext_resource type="Script" uid="uid://b7a5p2lnl2eev" path="res://Levels/level_1.gd" id="1_3anf8"]
 [ext_resource type="Texture2D" uid="uid://cw5kx62uakpqr" path="res://Assets/Tilesets/snow-floor-tiles.png" id="1_w77jt"]
 [ext_resource type="Texture2D" uid="uid://bhokl7ayqb7rr" path="res://Assets/Tilesets/background.png" id="2_fhqol"]
-[ext_resource type="Texture2D" uid="uid://by8d2p7v2xyhk" path="res://Assets/Sprites/sun/sun.png" id="3_iotdp"]
+[ext_resource type="Texture2D" uid="uid://d3o6r2hstx3sj" path="res://Assets/Sprites/sun/sun.png" id="3_iotdp"]
 
 [sub_resource type="Gradient" id="Gradient_fhqol"]
 offsets = PackedFloat32Array(0, 0.24390244, 0.27913278, 1)
@@ -73,7 +73,7 @@ tile_set = SubResource("TileSet_fhqol")
 position = Vector2(8, 184)
 
 [node name="birbs_spawn" type="Marker2D" parent="."]
-position = Vector2(128, 16)
+position = Vector2(128, 64)
 
 [node name="goal_zone" type="Area2D" parent="."]
 position = Vector2(360, 184)
