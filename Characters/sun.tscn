@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7roenci6wpu0"]
+
+[ext_resource type="Texture2D" uid="uid://oxp1v5cosvuk" path="res://Assets/Sprites/sun/sun1.png" id="1_b6c2s"]
+[ext_resource type="Texture2D" uid="uid://dtg0xedkbwj23" path="res://Assets/Sprites/sun/sun2.png" id="2_ibb3b"]
+[ext_resource type="Texture2D" uid="uid://dsbr1hj8qyvrx" path="res://Assets/Sprites/sun/sun3.png" id="3_sfggu"]
+[ext_resource type="Script" uid="uid://chq4cdxt31mbe" path="res://Characters/sun.gd" id="4_f6s1b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgf16"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": ExtResource("1_b6c2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ibb3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sfggu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ibb3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sfggu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_fhqol"]
+offsets = PackedFloat32Array(0, 0.24390244, 0.27913278, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.288518, 0.288518, 0.28851795, 1, 0.18359044, 0.18359044, 0.18359044, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j605x"]
+gradient = SubResource("Gradient_fhqol")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[node name="Sun" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rgf16")
+frame_progress = 0.73638904
+script = ExtResource("4_f6s1b")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(11.999999, 11.999998)
+color = Color(0.6039216, 0.5764706, 0, 1)
+energy = 1.3
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_j605x")

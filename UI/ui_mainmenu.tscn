@@ -38,7 +38,9 @@ layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[center]Melty Balls[/center]"
+text = "Roly
+         Poly
+                  Snowy"
 fit_content = true
 
 [node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -55,6 +57,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "QUIT GAME"
 icon = ExtResource("3_0sy5l")
+icon_alignment = 2
 expand_icon = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -2,21 +2,38 @@ extends Node2D
 
 @onready var snowball_spawner := $snowball_spawn
 @onready var birbs_spawner := $birbs_spawn
+@onready var sun_spawner := $sun_spawn
 var goalMin : int
 var lilguysMax : int
 var goalCounter : int
 var lilguyNode : LilGuy
 var birbsNode : Node
-
-@export var light: PointLight2D
+var sunNode : Node
+var light: PointLight2D
 
 func _ready():
 	goalMin = 10 #lilguys that need to reach goal for win condition
 	lilguysMax = 20 #max lilguys that will spawn
 	goalCounter = 0 #counter for current goals reached
-	spawnLilGuys()
-	spawnBirbs()
+	initSpawns() #spawn initial objects, TODO: lilguys should have continous spawn logic until max is reached
 	
+func initSpawns():
+	#spawn sun object
+	spawnSun()
+	#get light source from the sun node
+	for child in sunNode.get_children():
+		if child is PointLight2D:
+			light = child
+			break #exit loop
+	spawnBirbs()
+	spawnLilGuys()
+
+func spawnSun():
+	sunNode = load(Global.sunPath).instantiate()
+	sunNode.global_position = sun_spawner.global_position
+	add_child(sunNode)
+	sunNode.show()
+
 func spawnLilGuys():
 	lilguyNode = load(Global.lilguyPath).instantiate()
 	lilguyNode.light = light

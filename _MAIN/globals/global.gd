@@ -23,6 +23,7 @@ const FRICTION = 15
 #global path strings
 var lilguyPath : String = "res://Characters/LilGuys.tscn"
 var birbsPath : String = "res://Characters/birbs.tscn"
+var sunPath : String = "res://Characters/sun.tscn"
 
 #use subviewport with these sizes
 #parent node should be subviewport container with stretch on, shrink stretch 5
