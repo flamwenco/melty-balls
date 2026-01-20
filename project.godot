@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://_MAIN/globals/global.gd"
 SignalBus="*res://_MAIN/globals/signalbus.gd"
+HudData="*res://_MAIN/globals/huddata.gd"
 
 [display]
 

@@ -9,7 +9,7 @@ class_name Level extends Node2D
 ## Number of lil guys that need to reach goal for win condition.
 @export var goal_min: int
 ## Max lil guys that will spawn.
-@export var lil_guys_max : int
+@export var lilguys_max_to_spawn : int
 ## The scene for the lil guys, for spawning purposes.
 @export var lil_guy_scene: PackedScene
 
@@ -19,21 +19,22 @@ var lil_guy: LilGuy
 var goal_counter := 0
 var lilguy_counter := 0 
 var lilguys_melted := 0
-var max_lilguys_to_lose = lil_guys_max - goal_min
+var lilguys_max_to_lose := 0
 
 func _ready():
 	updateHud()
+	lilguys_max_to_lose = lilguys_max_to_spawn - goal_min #determines fail state if too many lilguys melt
 	SignalBus.goalCountUp.connect(goalStateCounter)
 	SignalBus.meltCountUp.connect(meltCounter)
 
 func _physics_process(_delta: float):
 	#spawn lilguys when spawn zone is clear and lilguy max not reached
-	if spawnZoneIsClear() && lilguy_counter < lil_guys_max:
+	if spawnZoneIsClear() && lilguy_counter < lilguys_max_to_spawn:
 		spawnLilGuy()
 		lilguy_counter += 1
 		updateHud()
 	#trigger game over / fail state when lost too many lilguys
-	if lilguys_melted > max_lilguys_to_lose:
+	if lilguys_melted > lilguys_max_to_lose:
 		loseState()
 	
 func spawnLilGuy():
@@ -73,6 +74,11 @@ func loseState():
 	SignalBus.loadMainMenu.emit()
 	
 func updateHud():
-	SignalBus.updateHud.emit(goal_counter, goal_min, lil_guys_max-lilguy_counter, lilguys_melted)
+	HudData.current_goals = goal_counter
+	HudData.goals_needed = goal_min
+	HudData.lilguys_melted = lilguys_melted
+	HudData.lilguys_remaining = lilguys_max_to_spawn - goal_counter - lilguys_melted
+	HudData.lilguys_max = lilguys_max_to_spawn
+	SignalBus.updateHud.emit()
 		
 #TODO: UI child node for level class for HUD? such as lilguys left to spawn, current goals, etc?

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=18 format=4 uid="uid://m4ihrjrxa1ig"]
 
 [ext_resource type="Script" uid="uid://dxdrjgk0ph461" path="res://Levels/level.gd" id="1_acdnu"]
 [ext_resource type="PackedScene" uid="uid://cfnclf88rqoqo" path="res://Characters/birbs.tscn" id="3_y3x56"]
+[ext_resource type="Texture2D" uid="uid://chfg5vj5f1ox3" path="res://Assets/Tilesets/transluscent-floor-tiles.png" id="4_q1ycg"]
 [ext_resource type="Texture2D" uid="uid://bhokl7ayqb7rr" path="res://Assets/Tilesets/background.png" id="4_qc8g6"]
 [ext_resource type="PackedScene" uid="uid://b7roenci6wpu0" path="res://Characters/sun.tscn" id="5_q1ycg"]
 [ext_resource type="Texture2D" uid="uid://cw5kx62uakpqr" path="res://Assets/Tilesets/snow-floor-tiles.png" id="6_n6v67"]
@@ -40,6 +41,30 @@ occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3anf8")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3x56"]
+texture = ExtResource("4_q1ycg")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_qc8g6"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_y3x56")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1ycg"]
 size = Vector2(32, 16)
 
@@ -52,7 +77,7 @@ size = Vector2(32, 16)
 [node name="Level" type="Node2D"]
 script = ExtResource("1_acdnu")
 goal_min = 1
-lil_guys_max = 10
+lilguys_max_to_spawn = 1
 metadata/_custom_type_script = "uid://dxdrjgk0ph461"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -65,6 +90,9 @@ texture = ExtResource("4_qc8g6")
 [node name="TileMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAwAAAAAAAIAAAAAAA0AAAAAAAAAAAABAA0AAAAAAAAAAAACAA0AAAAAAAAAAAADAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAA0AAAAAAAAAAAAHAA0AAAAAAAAAAAAIAA0AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAA0AAAAAAAAAAAALAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAANAA0AAAAAAAAAAAAOAA0AAAAAAAAAAAAPAA0AAAAAAAAAAAAQAA0AAAAAAAAAAAARAA0AAAAAAAAAAAASAA0AAAAAAAAAAAATAA0AAAAAAAAAAAAUAA0AAAAAAAAAAAAVAA0AAAAAAAAAAAAWAA0AAAAAAAAAAAAXAA0AAAAAAAAAAAAXAAwAAAACAAIAAAAWAAwAAAABAAIAAAAVAAwAAAABAAIAAAAUAAwAAAABAAIAAAATAAwAAAABAAIAAAASAAwAAAABAAIAAAARAAwAAAABAAIAAAAQAAwAAAABAAIAAAAPAAwAAAABAAIAAAAOAAwAAAABAAIAAAANAAwAAAABAAIAAAAMAAwAAAABAAIAAAALAAwAAAABAAIAAAAKAAwAAAABAAIAAAAJAAwAAAABAAIAAAAIAAwAAAABAAIAAAAHAAwAAAABAAIAAAAGAAwAAAABAAIAAAAFAAwAAAABAAIAAAAEAAwAAAABAAIAAAADAAwAAAABAAIAAAACAAwAAAABAAIAAAABAAwAAAABAAIAAAATAAsAAAAAAAEAAAAUAAsAAAABAAEAAAAVAAoAAAABAAAAAAAWAAoAAAACAAAAAAAWAAsAAAACAAEAAAAXAAsAAAAAAAAAAAAXAAoAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAAAAAAYAAwAAAAAAAAAAAAYAA0AAAAAAAAAAAAXAAkAAAAAAAAAAAAXAAgAAAAAAAAAAAAXAAcAAAAAAAAAAAAXAAYAAAAAAAAAAAAXAAUAAAAAAAAAAAAXAAQAAAAAAAAAAAAXAAMAAAAAAAAAAAAXAAIAAAAAAAAAAAAXAAEAAAAAAAAAAAAXAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAYAAEAAAAAAAAAAAAYAAIAAAAAAAAAAAAYAAMAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_fhqol")
+
+[node name="TileMap2" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_qc8g6")
 
 [node name="Sun" parent="." instance=ExtResource("5_q1ycg")]
 position = Vector2(192, 32)
