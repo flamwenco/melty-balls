@@ -96,3 +96,9 @@ shape = SubResource("WorldBoundaryShape2D_w77jt")
 position = Vector2(384, 0)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_3anf8")
+
+[node name="GoalSafeZone" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GoalSafeZone"]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(335, 176, 335, 174, 367, 168, 367, 176)

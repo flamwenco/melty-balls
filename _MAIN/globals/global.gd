@@ -11,6 +11,7 @@ enum GameState {
 #global vars
 var Current_GameState : GameState
 var Current_Level : int
+var debug := false
 
 #global consts
 const GameSizeX = 1920

@@ -44,3 +44,4 @@ func loadMainMenu():
 	hudscreen.hide()
 	pausescreen.hide()
 	mainmenu.show()
+	

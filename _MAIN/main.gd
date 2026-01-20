@@ -10,3 +10,8 @@ func _ready():
 	SignalBus.loadLevel.connect(sceneManager.loadLevel)
 	SignalBus.loadMainMenu.connect(sceneManager.loadMainMenu)
 	SignalBus.updateGameState.connect(sceneManager.updateGameState)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_debug", false, true):
+		Global.debug = !Global.debug
+		SignalBus.toggle_debug.emit(Global.debug)
