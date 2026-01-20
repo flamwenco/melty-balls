@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://66sny5ku3jsj"]
+
+[ext_resource type="Texture2D" uid="uid://cdw0xbenelro1" path="res://Assets/Sprites/meltywalls/melty-wall-spritesheet.png" id="1_sd4au"]
+[ext_resource type="Script" uid="uid://db43mtgspyd2s" path="res://Levels/LevelThings/melty_wall.gd" id="1_w38do"]
+[ext_resource type="PackedScene" uid="uid://bh4fsaof3ejnq" path="res://Characters/LightDetector.tscn" id="3_jt2mu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypeoq"]
+atlas = ExtResource("1_sd4au")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pimt"]
+atlas = ExtResource("1_sd4au")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ffek"]
+atlas = ExtResource("1_sd4au")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt2mu"]
+atlas = ExtResource("1_sd4au")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w38do"]
+atlas = ExtResource("1_sd4au")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gjng0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypeoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pimt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ffek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt2mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w38do")
+}],
+"loop": true,
+"name": &"melting",
+"speed": 5.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jt2mu"]
+emission_shape_scale = Vector3(7, 7, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 5.4, 0)
+linear_accel_min = 89.99999
+linear_accel_max = 99.99999
+damping_min = 5.0
+damping_max = 5.0
+
+[node name="MeltyWall" type="Node2D" node_paths=PackedStringArray("light_detector", "sprite", "particles") groups=["sighted_tiles"]]
+script = ExtResource("1_w38do")
+percent_damaged_per_second = 20.0
+light_detector = NodePath("LightDetector")
+sprite = NodePath("AnimatedSprite2D")
+particles = NodePath("GPUParticles2D")
+metadata/_custom_type_script = "uid://db43mtgspyd2s"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gjng0")
+animation = &"melting"
+speed_scale = 0.0
+
+[node name="LightDetector" parent="." instance=ExtResource("3_jt2mu")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -2)
+amount = 3
+lifetime = 0.3
+speed_scale = 0.4
+explosiveness = 0.2
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jt2mu")

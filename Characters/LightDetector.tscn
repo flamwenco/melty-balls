@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh4fsaof3ejnq"]
+
+[ext_resource type="Script" uid="uid://cmfdqd267xvxg" path="res://light_detector.gd" id="1_5vf8y"]
+
+[node name="LightDetector" type="RayCast2D"]
+collide_with_areas = true
+script = ExtResource("1_5vf8y")
+metadata/_custom_type_script = "uid://cmfdqd267xvxg"
+
+[node name="DebugLine" type="Line2D" parent="."]
+width = 2.0

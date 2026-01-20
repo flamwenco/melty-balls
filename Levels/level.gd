@@ -1,15 +1,22 @@
 class_name Level extends Node2D
+## Number of lil guys that need to reach goal for win condition.
+@export var goal_min: int
+## Max lil guys that will spawn.
+@export var lilguys_max_to_spawn : int
 
+@export_group("Components")
+
+@export_subgroup("Nodes")
+## The level's tiles.
+@export var tile_map: TileMapLayer
 ## Where lil guys will spawn at.
 @export var lilguy_spawn: Marker2D
 ## Where the player node.
 @export var birbs: Birbs
 ## The light node.
 @export var sun: Sun
-## Number of lil guys that need to reach goal for win condition.
-@export var goal_min: int
-## Max lil guys that will spawn.
-@export var lilguys_max_to_spawn : int
+
+@export_subgroup("Packed Scenes")
 ## The scene for the lil guys, for spawning purposes.
 @export var lil_guy_scene: PackedScene
 
@@ -26,6 +33,10 @@ func _ready():
 	lilguys_max_to_lose = lilguys_max_to_spawn - goal_min #determines fail state if too many lilguys melt
 	SignalBus.goalCountUp.connect(goalStateCounter)
 	SignalBus.meltCountUp.connect(meltCounter)
+	
+	# We defer this because the tiles we need to inform are scene tiles,
+	# which don't get instantiated until AFTER the TileMapLayer is ready.
+	call_deferred("inform_tiles_of_light")
 
 func _physics_process(_delta: float):
 	#spawn lilguys when spawn zone is clear and lilguy max not reached
@@ -60,7 +71,7 @@ func goalStateCounter():
 	if goal_counter == goal_min:
 		#TODO proper victory screen before immediately loading next level
 		Global.Current_Level += 1
-		if Global.Current_Level <= 2: #current max levels that exist
+		if Global.Current_Level <= 3: #current max levels that exist
 			SignalBus.loadLevel.emit(Global.Current_Level)
 		else:
 			SignalBus.loadMainMenu.emit() #TODO: proper THE END state
@@ -82,3 +93,8 @@ func updateHud():
 	SignalBus.updateHud.emit()
 		
 #TODO: UI child node for level class for HUD? such as lilguys left to spawn, current goals, etc?
+
+## We have certain tiles built from Scenes, and some of them need to know about the level's light.
+## Those Nodes are put into the "sighted_tiles" group so we can easily grab them after the fact here.
+func inform_tiles_of_light() -> void:
+	get_tree().set_group("sighted_tiles", "light", sun)

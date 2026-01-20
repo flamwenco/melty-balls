@@ -12,6 +12,8 @@ var shrink_scale : float
 var just_hit_wall : bool #could be used for an animation handler that will set this false after playing hitting-wall animation for 1-2 seconds
 
 var light: Sun
+var shaded: bool:
+	get: return light_detector.is_colliding()
 
 @export var percent_damaged_per_second: float = 15
 @export var min_shrink_scale : float = 0.5
@@ -26,12 +28,38 @@ func _ready():
 	
 	healthbar.visible = false
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	light_detector.set_light_position(light.global_position)
+	handle_health(delta)
 
+func _physics_process(delta : float) -> void:
+	
+	velocity.x = direction * Global.LILGUY_SPEED
+	sprite.rotation_degrees += rotation_speed * delta
+	
+	#if not on floor, apply gravity to y
+	if !is_on_floor():
+		velocity.y += Global.GRAVITY * delta
+	else:
+		velocity.y = 0
+	
+	move_and_slide()
+	
+	#detect if overlapping a goal zone
+	for area in detectionShape.get_overlapping_areas():
+		if area.is_in_group("goal"):
+			goalReached()
+			break
+	#NOTE: wall check MUST happen after move_and_slide
+	#otherwise get stuck on the wall due to order of physics processing
+	if is_on_wall():
+		direction *= -1
+		rotation_speed *= -1
+
+func handle_health(delta: float) -> void:
 	# Add some logic to handle when our lil' guy is melting
-	if not light_detector.is_colliding():
-		healthbar.value -= percent_damaged_per_second * _delta
+	if not shaded:
+		healthbar.value -= percent_damaged_per_second * delta
 		sprite.play("melting")
 	else:
 		sprite.play("default")
@@ -59,30 +87,6 @@ func _process(_delta: float) -> void:
 		SignalBus.meltCountUp.emit()
 		queue_free()
 
-func _physics_process(delta : float) -> void:
-	
-	velocity.x = direction * Global.LILGUY_SPEED
-	sprite.rotation_degrees += rotation_speed * delta
-	
-	#if not on floor, apply gravity to y
-	if !is_on_floor():
-		velocity.y += Global.GRAVITY * delta
-	else:
-		velocity.y = 0
-	
-	move_and_slide()
-	
-	#detect if overlapping a goal zone
-	for area in detectionShape.get_overlapping_areas():
-		if area.is_in_group("goal"):
-			goalReached()
-			break
-	#NOTE: wall check MUST happen after move_and_slide
-	#otherwise get stuck on the wall due to order of physics processing
-	if is_on_wall():
-		direction *= -1
-		rotation_speed *= -1
-		
 func goalReached():
 	SignalBus.goalCountUp.emit()
 	queue_free()

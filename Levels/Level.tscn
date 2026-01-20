@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=20 format=4 uid="uid://m4ihrjrxa1ig"]
 
 [ext_resource type="Script" uid="uid://dxdrjgk0ph461" path="res://Levels/level.gd" id="1_acdnu"]
+[ext_resource type="PackedScene" uid="uid://c7o1t4l0sfnfd" path="res://Characters/LilGuys.tscn" id="2_qc8g6"]
 [ext_resource type="PackedScene" uid="uid://cfnclf88rqoqo" path="res://Characters/birbs.tscn" id="3_y3x56"]
 [ext_resource type="Texture2D" uid="uid://chfg5vj5f1ox3" path="res://Assets/Tilesets/transluscent-floor-tiles.png" id="4_q1ycg"]
 [ext_resource type="Texture2D" uid="uid://bhokl7ayqb7rr" path="res://Assets/Tilesets/background.png" id="4_qc8g6"]
-[ext_resource type="PackedScene" uid="uid://b7roenci6wpu0" path="res://Characters/sun.tscn" id="5_q1ycg"]
+[ext_resource type="PackedScene" uid="uid://b7roenci6wpu0" path="res://Levels/LevelThings/sun.tscn" id="5_q1ycg"]
+[ext_resource type="PackedScene" uid="uid://66sny5ku3jsj" path="res://Levels/LevelThings/MeltyWall.tscn" id="5_y3x56"]
 [ext_resource type="Texture2D" uid="uid://cw5kx62uakpqr" path="res://Assets/Tilesets/snow-floor-tiles.png" id="6_n6v67"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q1ycg"]
@@ -81,6 +83,10 @@ texture = ExtResource("4_q1ycg")
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0/terrains_peering_bit/left_side = 2
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_qc8g6"]
+resource_name = "Scene Tiles"
+scenes/1/scene = ExtResource("5_y3x56")
+
 [sub_resource type="TileSet" id="TileSet_fhqol"]
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
@@ -93,6 +99,7 @@ terrain_set_0/terrain_2/name = "Glass /"
 terrain_set_0/terrain_2/color = Color(0.2323516, 0.1622051, 0.5002063, 1)
 sources/0 = SubResource("TileSetAtlasSource_3anf8")
 sources/1 = SubResource("TileSetAtlasSource_q1ycg")
+sources/2 = SubResource("TileSetScenesCollectionSource_qc8g6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1ycg"]
 size = Vector2(32, 16)
@@ -103,10 +110,15 @@ size = Vector2(32, 16)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3anf8"]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("tile_map", "lilguy_spawn", "birbs", "sun")]
 script = ExtResource("1_acdnu")
 goal_min = 1
 lilguys_max_to_spawn = 1
+tile_map = NodePath("TileMap")
+lilguy_spawn = NodePath("lilguy_spawn")
+birbs = NodePath("Birbs")
+sun = NodePath("Sun")
+lil_guy_scene = ExtResource("2_qc8g6")
 metadata/_custom_type_script = "uid://dxdrjgk0ph461"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
