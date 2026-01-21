@@ -20,6 +20,8 @@ var health: float
 
 var last_frame_idx: int = -1
 
+var can_melt := false
+
 var light: Sun:
 	set(value):
 		light = value
@@ -35,6 +37,14 @@ func _ready() -> void:
 	particles.emitting = false
 
 func _process(delta: float) -> void:
+	
+	# Hacky way to stop the weird issue where the wall would spawn with some damage already taken.
+	# I'm guessing it has to do with the order things are instantiated,
+	# so sometimes the raycast would spawn before occluders.
+	if !can_melt:
+		can_melt = true
+		return
+	
 	handle_health(delta)
 	particles.emitting = !shaded
 
@@ -61,7 +71,7 @@ func handle_health(delta: float) -> void:
 	# Now we use integer division to determine which frame the current health value corresponds to.
 	# Note that the animation frames were ordered in reverse to facilitate this match.
 	# Subtract 1 because 0-indexing.
-	var frame_idx := int(health / health_interval) - 1
+	var frame_idx := roundi(health / health_interval) - 1
 	
 	# Return early so we're not recalculating occlusion polygons all the time.
 	if frame_idx == last_frame_idx:
@@ -74,7 +84,8 @@ func handle_health(delta: float) -> void:
 	# calculate how far the occlusion polygon should extend down.
 	# ASSUMES SQUARE SPRITE AND STATIC TOP EXTENT!
 	var sprite_interval := size.y / frame_count
-	var bottom_extent := sprite_interval * frame_idx
+	var bottom_extent := (sprite_interval * frame_idx) - (size.y / 2)
+	bottom_extent = clampf(bottom_extent, -size.y / 2, bottom_extent)
 	occ_bot_left.y = bottom_extent
 	occ_bot_right.y = bottom_extent
 	
