@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://nvvv4fxxc8v5"]
+[gd_scene load_steps=10 format=3 uid="uid://bju3jc4xmjmy8"]
 
 [ext_resource type="Texture2D" uid="uid://6qwxex0girf3" path="res://icon.svg" id="1_t3bjo"]
 [ext_resource type="Script" uid="uid://blyr22826aydm" path="res://lil_guy.gd" id="2_ltf8m"]
@@ -45,7 +45,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_t3bjo")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(556, 433)
+position = Vector2(575, 391)
 collision_layer = 2
 metadata/_edit_group_ = true
 

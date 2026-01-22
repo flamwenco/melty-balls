@@ -6,6 +6,3 @@
 collide_with_areas = true
 script = ExtResource("1_5vf8y")
 metadata/_custom_type_script = "uid://cmfdqd267xvxg"
-
-[node name="DebugLine" type="Line2D" parent="."]
-width = 2.0

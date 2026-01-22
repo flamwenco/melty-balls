@@ -142,6 +142,7 @@ position = Vector2(192, 80)
 
 [node name="lilguy_spawn" type="Marker2D" parent="."]
 position = Vector2(8, 184)
+metadata/_edit_group_ = true
 
 [node name="lilguy_spawn_area" type="Area2D" parent="lilguy_spawn"]
 
