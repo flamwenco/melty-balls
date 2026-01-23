@@ -1,5 +1,9 @@
 extends Control
 
+func _ready():
+	if OS.get_name() == 'Web':
+		$MarginContainer/HBoxContainer/VBoxContainer/QuitButton.hide()
+
 func _on_next_level_button_pressed() -> void:
 	Global.Current_Level += 1
 	SignalBus.loadLevel.emit(Global.Current_Level)

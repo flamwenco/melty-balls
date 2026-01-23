@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	if OS.get_name() == 'Web':
+		$MarginContainer/HBoxContainer/VBoxContainer/QuitButton.hide()
 
 func _on_start_button_pressed() -> void:
 	Global.Current_Level = 1

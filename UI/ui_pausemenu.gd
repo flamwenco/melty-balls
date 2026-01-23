@@ -1,6 +1,8 @@
 extends Control
 
 func _ready():
+	if OS.get_name() == 'Web':
+		$MarginContainer/HBoxContainer/VBoxContainer/QuitButton.hide()
 	hide()
 
 func _unhandled_input(event: InputEvent) -> void:
