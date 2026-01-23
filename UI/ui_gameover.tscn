@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://8km2cl58ui4x"]
+[gd_scene load_steps=4 format=3 uid="uid://8km2cl58ui4x"]
 
+[ext_resource type="FontFile" uid="uid://b0fqxobgnud7b" path="res://Assets/Fonts/pixel_operator/PixelOperatorHBSC.ttf" id="1_3rrwo"]
 [ext_resource type="Script" uid="uid://c1ffy5ytvirr1" path="res://UI/ui_gameover.gd" id="1_dek56"]
+
+[sub_resource type="Theme" id="Theme_lun6i"]
+default_font = ExtResource("1_3rrwo")
 
 [node name="UiGameOver" type="Control"]
 process_mode = 3
@@ -10,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_lun6i")
 script = ExtResource("1_dek56")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

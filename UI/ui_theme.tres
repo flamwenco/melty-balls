@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cnh7h68snirln"]
+
+[ext_resource type="FontFile" uid="uid://b0fqxobgnud7b" path="res://Assets/Fonts/pixel_operator/PixelOperatorHBSC.ttf" id="1_it55r"]
+
+[resource]
+default_font = ExtResource("1_it55r")

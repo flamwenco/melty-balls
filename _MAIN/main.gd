@@ -10,6 +10,7 @@ func _ready():
 	SignalBus.loadLevel.connect(sceneManager.loadLevel)
 	SignalBus.loadMainMenu.connect(sceneManager.loadMainMenu)
 	SignalBus.loadCredits.connect(sceneManager.loadCredits)
+	SignalBus.loadLicenses.connect(sceneManager.loadLicenses)
 	SignalBus.loadVictory.connect(sceneManager.loadVictory)
 	SignalBus.loadGameOver.connect(sceneManager.loadGameOver)
 	SignalBus.updateGameState.connect(sceneManager.updateGameState)
