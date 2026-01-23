@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - mobile_controls
 
 permissions:
   contents: write
