@@ -1,6 +1,6 @@
 extends Control
 
-@onready var hud_text := $RichTextLabel
+@onready var hud_text := $MarginContainer/VBoxContainer/HBoxContainer2/Control/RichTextLabel
 
 func _ready():
 	hide()
