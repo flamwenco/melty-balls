@@ -21,6 +21,8 @@ class_name Level extends Node2D
 @export var lil_guy_scene: PackedScene
 
 @onready var spawn_area : Area2D = $lilguy_spawn/lilguy_spawn_area
+@onready var spawn_area_label : RichTextLabel = $lilguy_spawn/lilguy_spawn_area/SpawnLabel
+@onready var goal_label : RichTextLabel = $goal_zone/GoalLabel
 var lil_guy: LilGuy
 
 var goal_counter := 0
@@ -33,6 +35,9 @@ func _ready():
 	lilguys_max_to_lose = lilguys_max_to_spawn - goal_min #determines fail state if too many lilguys melt
 	SignalBus.goalCountUp.connect(goalStateCounter)
 	SignalBus.meltCountUp.connect(meltCounter)
+	
+	spawn_area_label.install_effect(preload("res://wave_effect.gd").new())
+	goal_label.install_effect(preload("res://wave_effect.gd").new())
 	
 	# We defer this because the tiles we need to inform are scene tiles,
 	# which don't get instantiated until AFTER the TileMapLayer is ready.
@@ -82,13 +87,10 @@ func loseState():
 	SignalBus.loadGameOver.emit()
 	
 func updateHud():
-	HudData.current_goals = goal_counter
-	HudData.goals_needed = goal_min
-	HudData.lilguys_melted = lilguys_melted
-	HudData.lilguys_remaining = lilguys_max_to_spawn - goal_counter - lilguys_melted
-	HudData.lilguys_max = lilguys_max_to_spawn
-	SignalBus.updateHud.emit()
-		
+	var goal_count = goal_min - goal_counter
+	spawn_area_label.text = "[custom_wave]" + str(lilguys_max_to_spawn - lilguy_counter) + "[/custom_wave]"
+	goal_label.text = "[custom_wave]" + str(goal_count if goal_count >= 0 else 0) + "[/custom_wave]"
+
 ## We have certain tiles built from Scenes, and some of them need to know about the level's light.
 ## Those Nodes are put into the "sighted_tiles" group so we can easily grab them after the fact here.
 func inform_tiles_of_light() -> void:

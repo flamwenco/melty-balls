@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://damj7a3eikkvr"]
+[gd_scene load_steps=5 format=3 uid="uid://b57hkbcyf2xm5"]
 
-[ext_resource type="Script" uid="uid://dkqvuyl730s2s" path="res://UI/ui_credits.gd" id="1_2iqfh"]
+[ext_resource type="Script" path="res://UI/ui_credits.gd" id="1_2iqfh"]
+[ext_resource type="FontFile" uid="uid://b0fqxobgnud7b" path="res://Assets/Fonts/pixel_operator/PixelOperatorHBSC.ttf" id="1_llkbl"]
+[ext_resource type="Theme" uid="uid://cnh7h68snirln" path="res://UI/ui_theme.tres" id="3_kseq3"]
+
+[sub_resource type="Theme" id="Theme_kseq3"]
+default_font = ExtResource("1_llkbl")
 
 [node name="UiCredits" type="Control"]
 layout_mode = 3
@@ -9,20 +14,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_kseq3")
 script = ExtResource("1_2iqfh")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="bg_color" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="bg_color" type="ColorRect" parent="MarginContainer"]
-layout_mode = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.025
+anchor_right = 0.975
+anchor_bottom = 0.975
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -35,6 +48,7 @@ alignment = 1
 
 [node name="Credits title" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_kseq3")
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center][u]CREDITS[/u][/center]"
@@ -43,6 +57,7 @@ scroll_active = false
 
 [node name="credits text" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center][u]PROGRAMMING[/u]

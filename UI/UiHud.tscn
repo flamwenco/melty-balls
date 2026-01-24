@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://djm1r4nl81vfc"]
+[gd_scene load_steps=9 format=3 uid="uid://djm1r4nl81vfc"]
 
 [ext_resource type="Script" uid="uid://dgbnjgrijkiv6" path="res://UI/ui_hud.gd" id="1_1o2ly"]
+[ext_resource type="Theme" uid="uid://cnh7h68snirln" path="res://UI/ui_theme.tres" id="1_e4gk0"]
 [ext_resource type="Texture2D" uid="uid://muoc86h3mc68" path="res://Assets/Sprites/onscreencontrols/Sprites/transparentDark/transparentDark12.png" id="2_3ycuw"]
 [ext_resource type="Texture2D" uid="uid://dtoqvlf4gcu32" path="res://Assets/Sprites/onscreencontrols/Sprites/transparentDark/transparentDark22.png" id="2_846jn"]
 [ext_resource type="Texture2D" uid="uid://qts0eu25bbrm" path="res://Assets/Sprites/onscreencontrols/Sprites/transparentLight/transparentLight12.png" id="3_e4gk0"]
@@ -16,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_e4gk0")
 script = ExtResource("1_1o2ly")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -42,19 +44,6 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer2/Control"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 1824.0
-offset_bottom = 511.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 60
-text = "HUD SCRIPT WILL OVERWRITE THIS"
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

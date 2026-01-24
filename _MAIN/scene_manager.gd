@@ -8,6 +8,7 @@ extends Node
 @onready var victoryscreen := $"../UiVictory"
 @onready var gameoverscreen := $"../UiGameOver"
 @onready var credits := $"../UiCredits"
+@onready var licenses := $"../UiLicenses"
 
 var levelNode : Node
 var levelPath : String
@@ -51,6 +52,12 @@ func loadCredits():
 	hideUIs()
 	credits.show()
 	
+func loadLicenses():
+	SignalBus.updateGameState.emit(Global.GameState.LICENSES)
+	unloadLevel()
+	hideUIs()
+	licenses.show()
+	
 func loadVictory():
 	SignalBus.updateGameState.emit(Global.GameState.VICTORY)
 	victoryscreen.show() #we don't hide all screens, so level can still be visible behind victory screen
@@ -65,5 +72,6 @@ func hideUIs():
 	victoryscreen.hide()
 	gameoverscreen.hide()
 	credits.hide()
+	licenses.hide()
 	gamecanvas.hide()
 	hudscreen.hide()

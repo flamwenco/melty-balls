@@ -7,7 +7,8 @@ enum GameState {
 	PLAYING,
 	VICTORY,
 	GAMEOVER,
-	CREDITS
+	CREDITS,
+	LICENSES
 }
 
 #global vars

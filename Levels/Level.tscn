@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=22 format=4 uid="uid://m4ihrjrxa1ig"]
 
 [ext_resource type="Script" uid="uid://dxdrjgk0ph461" path="res://Levels/level.gd" id="1_acdnu"]
 [ext_resource type="PackedScene" uid="uid://c7o1t4l0sfnfd" path="res://Characters/LilGuys.tscn" id="2_qc8g6"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b7roenci6wpu0" path="res://Levels/LevelThings/sun.tscn" id="5_q1ycg"]
 [ext_resource type="PackedScene" uid="uid://66sny5ku3jsj" path="res://Levels/LevelThings/MeltyWall.tscn" id="5_y3x56"]
 [ext_resource type="Texture2D" uid="uid://cw5kx62uakpqr" path="res://Assets/Tilesets/snow-floor-tiles.png" id="6_n6v67"]
+[ext_resource type="FontFile" uid="uid://bbfwwb8s46p8h" path="res://Assets/Fonts/pixel_operator/PixelOperator-Bold.ttf" id="9_ht8ui"]
+[ext_resource type="Theme" uid="uid://cnh7h68snirln" path="res://UI/ui_theme.tres" id="10_n6v67"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q1ycg"]
 polygon = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
@@ -149,11 +151,47 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lilguy_spawn/lilguy_spawn_area"]
 shape = SubResource("RectangleShape2D_q1ycg")
 
+[node name="SpawnLabel" type="RichTextLabel" parent="lilguy_spawn/lilguy_spawn_area"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -26.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("9_ht8ui")
+bbcode_enabled = true
+text = "XX"
+horizontal_alignment = 1
+
 [node name="goal_zone" type="Area2D" parent="." groups=["goal"]]
 position = Vector2(360, 184)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="goal_zone"]
 shape = SubResource("RectangleShape2D_fhqol")
+
+[node name="GoalLabel" type="RichTextLabel" parent="goal_zone"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -31.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("10_n6v67")
+theme_override_fonts/normal_font = ExtResource("9_ht8ui")
+bbcode_enabled = true
+text = "XX"
 
 [node name="worldbounds" type="StaticBody2D" parent="."]
 

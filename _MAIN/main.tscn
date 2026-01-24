@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://db8ikthn32v3m"]
+[gd_scene load_steps=10 format=3 uid="uid://db8ikthn32v3m"]
 
 [ext_resource type="PackedScene" uid="uid://dgdl3rdft4y75" path="res://UI/ui_mainmenu.tscn" id="1_03sfx"]
 [ext_resource type="Script" uid="uid://bo03ab06mkll5" path="res://_MAIN/main.gd" id="1_usosw"]
 [ext_resource type="Script" uid="uid://bwt840s3khe8j" path="res://_MAIN/scene_manager.gd" id="3_cucgf"]
 [ext_resource type="PackedScene" uid="uid://djm1r4nl81vfc" path="res://UI/UiHud.tscn" id="4_45b34"]
 [ext_resource type="PackedScene" uid="uid://2a1kyjxlde5y" path="res://UI/ui_pausemenu.tscn" id="4_cucgf"]
-[ext_resource type="PackedScene" uid="uid://damj7a3eikkvr" path="res://UI/ui_credits.tscn" id="5_3e27e"]
+[ext_resource type="PackedScene" uid="uid://b57hkbcyf2xm5" path="res://UI/ui_credits.tscn" id="5_3e27e"]
 [ext_resource type="PackedScene" uid="uid://8km2cl58ui4x" path="res://UI/ui_gameover.tscn" id="5_g5ko0"]
 [ext_resource type="PackedScene" uid="uid://chpvuer3lqoam" path="res://UI/ui_victory.tscn" id="5_hhsx1"]
+[ext_resource type="PackedScene" uid="uid://dyedeq7fgm004" path="res://UI/ui_licenses.tscn" id="8_tdj4x"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_usosw")
@@ -39,6 +40,11 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="UiCredits" parent="." instance=ExtResource("5_3e27e")]
+visible = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="UiLicenses" parent="." instance=ExtResource("8_tdj4x")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
