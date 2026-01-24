@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://m4ihrjrxa1ig"]
+[gd_scene load_steps=23 format=4 uid="uid://m4ihrjrxa1ig"]
 
 [ext_resource type="Script" uid="uid://dxdrjgk0ph461" path="res://Levels/level.gd" id="1_acdnu"]
 [ext_resource type="PackedScene" uid="uid://c7o1t4l0sfnfd" path="res://Characters/LilGuys.tscn" id="2_qc8g6"]
@@ -114,6 +114,9 @@ size = Vector2(32, 16)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3anf8"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6v67"]
+size = Vector2(384, 20)
+
 [node name="Level" type="Node2D" node_paths=PackedStringArray("tile_map", "lilguy_spawn", "birbs", "sun")]
 script = ExtResource("1_acdnu")
 goal_min = 1
@@ -209,3 +212,9 @@ shape = SubResource("WorldBoundaryShape2D_3anf8")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GoalSafeZone"]
 position = Vector2(1, 0)
 polygon = PackedVector2Array(335, 176, 335, 174, 367, 168, 367, 176)
+
+[node name="Killzone" type="Area2D" parent="." groups=["killzone"]]
+position = Vector2(192, 232)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("RectangleShape2D_n6v67")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://db8ikthn32v3m"]
+[gd_scene load_steps=11 format=3 uid="uid://db8ikthn32v3m"]
 
 [ext_resource type="PackedScene" uid="uid://dgdl3rdft4y75" path="res://UI/ui_mainmenu.tscn" id="1_03sfx"]
 [ext_resource type="Script" uid="uid://bo03ab06mkll5" path="res://_MAIN/main.gd" id="1_usosw"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://8km2cl58ui4x" path="res://UI/ui_gameover.tscn" id="5_g5ko0"]
 [ext_resource type="PackedScene" uid="uid://chpvuer3lqoam" path="res://UI/ui_victory.tscn" id="5_hhsx1"]
 [ext_resource type="PackedScene" uid="uid://dyedeq7fgm004" path="res://UI/ui_licenses.tscn" id="8_tdj4x"]
+[ext_resource type="AudioStream" uid="uid://dki8rmi7q7trn" path="res://Assets/Sound/Music/Roly_Poly_Snowy_Theme_demo1_n.wav" id="10_0djke"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_usosw")
@@ -71,3 +72,7 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(384, 216)
 size_2d_override_stretch = true
 render_target_update_mode = 4
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_0djke")
+bus = &"Music"

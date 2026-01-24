@@ -3,6 +3,7 @@ extends Node2D
 @onready var gameViewPort := $GameCanvas
 @onready var sceneManager := $scene_manager
 @onready var pauseMenu := $UiPauseMenu
+@onready var music := $AudioStreamPlayer2D
 
 func _ready():
 	gameViewPort.hide()
@@ -14,6 +15,8 @@ func _ready():
 	SignalBus.loadVictory.connect(sceneManager.loadVictory)
 	SignalBus.loadGameOver.connect(sceneManager.loadGameOver)
 	SignalBus.updateGameState.connect(sceneManager.updateGameState)
+	#play music
+	music.play()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug", false, true):

@@ -50,6 +50,9 @@ func _physics_process(delta : float) -> void:
 		if area.is_in_group("goal"):
 			goalReached()
 			break
+		if area.is_in_group("killzone"):
+			healthbar.value = 0
+			break
 	#NOTE: wall check MUST happen after move_and_slide
 	#otherwise get stuck on the wall due to order of physics processing
 	if is_on_wall():

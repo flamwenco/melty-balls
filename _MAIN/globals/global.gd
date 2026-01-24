@@ -23,7 +23,7 @@ const GRAVITY = 980
 const PLAYER_SPEED = 300
 const LILGUY_SPEED = 50
 const FRICTION = 15
-const LAST_LEVEL = 3
+const LAST_LEVEL = 4
 
 #use subviewport with these sizes
 #parent node should be subviewport container with stretch on, shrink stretch 5

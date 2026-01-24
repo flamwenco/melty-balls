@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds65ojfv7o0ht"]
+
+[ext_resource type="Texture2D" uid="uid://cle4sswesl4vj" path="res://Assets/Sprites/invisiblocks/invisi-blocks1.png" id="1_xiymf"]
+[ext_resource type="Script" uid="uid://erdoovece81j" path="res://Levels/LevelThings/invisiblock/invisiblock.gd" id="1_xunvw"]
+[ext_resource type="Texture2D" uid="uid://g3i2ywlqs8hd" path="res://Assets/Sprites/invisiblocks/invisi-blocks2.png" id="2_xunvw"]
+[ext_resource type="Script" uid="uid://dfrh5t8fwnypj" path="res://Levels/LevelThings/invisiblock/invisiblock_light_detector.gd" id="3_mvujm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lfb4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xiymf")
+}],
+"loop": true,
+"name": &"invisible",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xunvw")
+}],
+"loop": true,
+"name": &"visible",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7bcy"]
+size = Vector2(16, 16)
+
+[node name="Invisiblock" type="StaticBody2D"]
+script = ExtResource("1_xunvw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6lfb4")
+animation = &"invisible"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o7bcy")
+
+[node name="LightDetector" type="RayCast2D" parent="."]
+collision_mask = 4
+script = ExtResource("3_mvujm")
