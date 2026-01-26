@@ -36,32 +36,36 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w877"]
-size = Vector2(15, 15)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ali6u"]
+radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ali6u"]
-size = Vector2(15, 15)
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjnd8"]
+radius = 8.0
 
-[node name="LilGuys" type="CharacterBody2D"]
+[node name="LilGuys" type="RigidBody2D" node_paths=PackedStringArray("sprite", "light_detector", "health_bar", "detection_shape", "physics_shape")]
 collision_layer = 3
 collision_mask = 3
-platform_wall_layers = 1
-safe_margin = 0.001
+constant_torque = 200.0
 script = ExtResource("1_lrffq")
+sprite = NodePath("AnimatedSprite2D")
+light_detector = NodePath("LightDetector")
+health_bar = NodePath("HealthBar")
+detection_shape = NodePath("Area2D")
+physics_shape = NodePath("PhysicsShape")
 metadata/_custom_type_script = "uid://dr6bqhoecnuwo"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rvt1s")
 
 [node name="PhysicsShape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7w877")
+shape = SubResource("CircleShape2D_ali6u")
 
 [node name="LightDetector" parent="." groups=["light_havers"] instance=ExtResource("5_ali6u")]
 
 [node name="Area2D" type="Area2D" parent="." groups=["lilguys"]]
 
 [node name="DetectionShape" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ali6u")
+shape = SubResource("CircleShape2D_bjnd8")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = -8.0

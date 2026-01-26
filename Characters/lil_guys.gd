@@ -1,15 +1,10 @@
 class_name LilGuy
-extends CharacterBody2D
-
-@onready var sprite := $AnimatedSprite2D
-@onready var light_detector: LightDetector = $LightDetector
-@onready var healthbar := $HealthBar
-@onready var detectionShape := $Area2D
+extends RigidBody2D
 
 var direction : float
-var rotation_speed : float
 var shrink_scale : float
 var just_hit_wall : bool #could be used for an animation handler that will set this false after playing hitting-wall animation for 1-2 seconds
+var initial_mass := mass
 
 var light: Sun
 var shaded: bool:
@@ -18,75 +13,73 @@ var shaded: bool:
 @export var percent_damaged_per_second: float = 15
 @export var min_shrink_scale : float = 0.5
 
+@export_group("Components")
+@export var sprite: AnimatedSprite2D
+@export var light_detector: LightDetector
+@export var health_bar: = TextureProgressBar
+@export var detection_shape: Area2D
+@export var physics_shape: CollisionShape2D
+
 func init(sun: Sun) -> void:
 	light = sun
 
 func _ready():
 	sprite.play("default")
 	direction = 1 #right
-	rotation_speed = 200.0
 	
-	healthbar.visible = false
+	health_bar.visible = false
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	light_detector.set_light_position(light.global_position)
 	handle_health(delta)
-
-func _physics_process(delta : float) -> void:
-	
-	velocity.x = direction * Global.LILGUY_SPEED
-	sprite.rotation_degrees += rotation_speed * delta
-	
-	#if not on floor, apply gravity to y
-	if !is_on_floor():
-		velocity.y += Global.GRAVITY * delta
-	else:
-		velocity.y = 0
-	
-	move_and_slide()
 	
 	#detect if overlapping a goal zone
-	for area in detectionShape.get_overlapping_areas():
+	for area in detection_shape.get_overlapping_areas():
 		if area.is_in_group("goal"):
 			goalReached()
 			break
 		if area.is_in_group("killzone"):
-			healthbar.value = 0
+			health_bar.value = 0
 			break
 	#NOTE: wall check MUST happen after move_and_slide
 	#otherwise get stuck on the wall due to order of physics processing
-	if is_on_wall():
-		direction *= -1
-		rotation_speed *= -1
+	#if is_on_wall():
+		#direction *= -1
+		#rotation_speed *= -1
 
 func handle_health(delta: float) -> void:
-	# Add some logic to handle when our lil' guy is melting
+	# Add some logic to handle when our lil' guy is meltingdelta
 	if not shaded:
-		healthbar.value -= percent_damaged_per_second * delta
+		health_bar.value -= percent_damaged_per_second * delta
 		sprite.play("melting")
 	else:
 		sprite.play("default")
 
 	# Display and progress the progress bar
-	if healthbar.value < 99:
-		healthbar.visible = true
+	if health_bar.value < 99:
+		health_bar.visible = true
 
-	if healthbar.value < 40:
-		healthbar.tint_progress = Color(1, 0, 0)
-	elif healthbar.value < 70:
-		healthbar.tint_progress = Color(1, 1, 0)
+	if health_bar.value < 40:
+		health_bar.tint_progress = Color(1, 0, 0)
+	elif health_bar.value < 70:
+		health_bar.tint_progress = Color(1, 1, 0)
 	else:
-		healthbar.tint_progress = Color(0, 1, 0)
+		health_bar.tint_progress = Color(0, 1, 0)
 		
 	# Shrink/"melt" with health progress
-	shrink_scale = (healthbar.value / healthbar.max_value)
+	shrink_scale = (health_bar.value / health_bar.max_value)
 	# minimum size of shrink
 	if shrink_scale <= min_shrink_scale: 
 		shrink_scale = min_shrink_scale
-	scale = Vector2 (shrink_scale, shrink_scale)
+	var scale_v := Vector2(shrink_scale, shrink_scale)
+	sprite.scale = scale_v
+	physics_shape.scale = scale_v
+	detection_shape.scale = scale_v
+	
+	mass = initial_mass * shrink_scale
 	
 	#if health is zero, delete self, signal melt counter
-	if healthbar.value == 0:
+	if health_bar.value == 0:
 		SignalBus.meltCountUp.emit()
 		queue_free()
 
