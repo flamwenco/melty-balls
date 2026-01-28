@@ -4,7 +4,9 @@ class_name Level extends Node2D
 ## Max lil guys that will spawn.
 @export var lilguy_spawn_max : int
 ## Lil guy rolling speed for this level. Can make negative to start rolling left.
-@export var lilguy_torque: float = 500.0
+@export var lilguy_torque: float
+## How quickly a lil guy melts in the sun, as a percentage.
+@export var lilguy_dps: float
 
 @export_group("Components")
 
@@ -61,7 +63,7 @@ func spawnLilGuy():
 	#could potentially have a use case in future scope?  otherwise TODO: delete me
 	lil_guy.set_name("LilGuys_"+ str(lilguy_counter))
 	#needed for lil_guy to detect lightsource
-	lil_guy.init(sun, lilguy_torque)
+	lil_guy.init(sun, lilguy_torque, lilguy_dps)
 	lil_guy.global_position = lilguy_spawn.global_position
 	add_child(lil_guy)
 	lil_guy.show()

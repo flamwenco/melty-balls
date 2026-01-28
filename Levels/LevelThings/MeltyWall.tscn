@@ -62,7 +62,6 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [node name="MeltyWall" type="StaticBody2D" node_paths=PackedStringArray("light_detector", "sprite", "particles", "occluder", "collider") groups=["sighted_tiles"]]
 script = ExtResource("1_w38do")
-max_health = 50.0
 percent_damaged_per_second = 20.0
 light_detector = NodePath("LightDetector")
 sprite = NodePath("AnimatedSprite2D")

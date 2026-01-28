@@ -2,7 +2,7 @@ class_name MeltyWall extends StaticBody2D
 
 const anim_name := &"melting"
 
-@export var max_health := 100.0
+const max_health := 100.0
 var health: float
 @export var percent_damaged_per_second: float
 

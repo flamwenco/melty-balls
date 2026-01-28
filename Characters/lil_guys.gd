@@ -5,12 +5,12 @@ var direction : float
 var shrink_scale : float
 var just_hit_wall : bool #could be used for an animation handler that will set this false after playing hitting-wall animation for 1-2 seconds
 var initial_mass := mass
+var damage_per_second: float
 
 var light: Sun
 var shaded: bool:
 	get: return light_detector.is_colliding()
 
-@export var percent_damaged_per_second: float = 15
 @export var min_shrink_scale : float = 0.5
 
 @export_group("Components")
@@ -20,9 +20,10 @@ var shaded: bool:
 @export var detection_shape: Area2D
 @export var physics_shape: CollisionShape2D
 
-func init(sun: Sun, torque: float) -> void:
+func init(sun: Sun, torque: float, dps: float) -> void:
 	light = sun
 	add_constant_torque(torque)
+	damage_per_second = dps
 
 func _ready():
 	sprite.play("default")
@@ -65,7 +66,7 @@ func _physics_process(delta: float) -> void:
 func handle_health(delta: float) -> void:
 	# Add some logic to handle when our lil' guy is melting
 	if not shaded:
-		health_bar.value -= percent_damaged_per_second * delta
+		health_bar.value -= damage_per_second * delta
 		sprite.play("melting")
 	else:
 		sprite.play("default")

@@ -122,7 +122,9 @@ size = Vector2(384, 20)
 [node name="Level" type="Node2D" node_paths=PackedStringArray("tile_map", "lilguy_spawn", "birbs", "sun")]
 script = ExtResource("1_acdnu")
 goal_min = 1
-lilguys_max_to_spawn = 1
+lilguy_spawn_max = 1
+lilguy_torque = 500.0
+lilguy_dps = 40.0
 tile_map = NodePath("TileMap")
 lilguy_spawn = NodePath("lilguy_spawn")
 birbs = NodePath("Birbs")
