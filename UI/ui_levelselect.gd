@@ -58,6 +58,7 @@ func get_level_nums() -> Array[int]:
 
 func _on_level_select_pressed(level: int) -> void:
 	hide()
+	Global.Current_Level = level
 	SignalBus.loadLevel.emit(level)
 	
 func _on_main_menu_select_pressed() -> void:
