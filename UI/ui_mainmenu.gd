@@ -9,6 +9,10 @@ func _on_start_button_pressed() -> void:
 	SignalBus.loadLevel.emit(Global.Current_Level)
 
 
+func _on_level_select_button_pressed() -> void:
+	SignalBus.loadLevelSelect.emit()
+
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 

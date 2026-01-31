@@ -5,6 +5,7 @@ extends Node
 signal updateGameState(newState : Global.GameState)
 signal loadLevel(levelNum : int)
 signal loadMainMenu()
+signal loadLevelSelect()
 signal loadCredits()
 signal loadLicenses()
 signal loadVictory()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://db8ikthn32v3m"]
+[gd_scene format=3 uid="uid://db8ikthn32v3m"]
 
 [ext_resource type="PackedScene" uid="uid://dgdl3rdft4y75" path="res://UI/ui_mainmenu.tscn" id="1_03sfx"]
 [ext_resource type="Script" uid="uid://bo03ab06mkll5" path="res://_MAIN/main.gd" id="1_usosw"]
+[ext_resource type="PackedScene" uid="uid://bodosg4bpsb3k" path="res://UI/ui_levelselect.tscn" id="3_2k1gh"]
 [ext_resource type="Script" uid="uid://bwt840s3khe8j" path="res://_MAIN/scene_manager.gd" id="3_cucgf"]
 [ext_resource type="PackedScene" uid="uid://djm1r4nl81vfc" path="res://UI/UiHud.tscn" id="4_45b34"]
 [ext_resource type="PackedScene" uid="uid://2a1kyjxlde5y" path="res://UI/ui_pausemenu.tscn" id="4_cucgf"]
@@ -11,53 +12,58 @@
 [ext_resource type="PackedScene" uid="uid://dyedeq7fgm004" path="res://UI/ui_licenses.tscn" id="8_tdj4x"]
 [ext_resource type="AudioStream" uid="uid://dki8rmi7q7trn" path="res://Assets/Sound/Music/Roly_Poly_Snowy_Theme_demo1_n.wav" id="10_0djke"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=2067750323]
 script = ExtResource("1_usosw")
 
-[node name="UiMainmenu" parent="." instance=ExtResource("1_03sfx")]
+[node name="UiMainmenu" parent="." unique_id=707469342 instance=ExtResource("1_03sfx")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="UiPauseMenu" parent="." instance=ExtResource("4_cucgf")]
+[node name="UiLevelselect" parent="." unique_id=421965027 instance=ExtResource("3_2k1gh")]
+visible = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="UiPauseMenu" parent="." unique_id=1886722564 instance=ExtResource("4_cucgf")]
 visible = false
 z_index = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 
-[node name="UiHud" parent="." instance=ExtResource("4_45b34")]
+[node name="UiHud" parent="." unique_id=301752825 instance=ExtResource("4_45b34")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="UiVictory" parent="." instance=ExtResource("5_hhsx1")]
+[node name="UiVictory" parent="." unique_id=1596490491 instance=ExtResource("5_hhsx1")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="UiGameOver" parent="." instance=ExtResource("5_g5ko0")]
+[node name="UiGameOver" parent="." unique_id=1870618991 instance=ExtResource("5_g5ko0")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="UiCredits" parent="." instance=ExtResource("5_3e27e")]
+[node name="UiCredits" parent="." unique_id=820976494 instance=ExtResource("5_3e27e")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="UiLicenses" parent="." instance=ExtResource("8_tdj4x")]
+[node name="UiLicenses" parent="." unique_id=1819415566 instance=ExtResource("8_tdj4x")]
 visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="scene_manager" type="Node" parent="."]
+[node name="scene_manager" type="Node" parent="." unique_id=2060205092]
 process_mode = 3
 script = ExtResource("3_cucgf")
 
-[node name="GameCanvas" type="CanvasLayer" parent="."]
+[node name="GameCanvas" type="CanvasLayer" parent="." unique_id=969479674]
 layer = -1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="GameCanvas"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GameCanvas" unique_id=407958034]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -66,13 +72,13 @@ grow_vertical = 2
 stretch = true
 stretch_shrink = 5
 
-[node name="SubViewport" type="SubViewport" parent="GameCanvas/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="GameCanvas/SubViewportContainer" unique_id=1694100495]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(384, 216)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1971986654]
 stream = ExtResource("10_0djke")
 bus = &"Music"
