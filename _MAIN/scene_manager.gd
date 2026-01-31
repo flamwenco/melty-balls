@@ -2,6 +2,7 @@ extends Node
 
 @onready var subview := $"../GameCanvas/SubViewportContainer/SubViewport"
 @onready var mainmenu := $"../UiMainmenu"
+@onready var levelselect := $"../UiLevelselect"
 @onready var gamecanvas := $"../GameCanvas"
 @onready var pausescreen := $"../UiPauseMenu"
 @onready var hudscreen := $"../UiHud"
@@ -45,7 +46,13 @@ func loadMainMenu():
 	unloadLevel()
 	hideUIs()
 	mainmenu.show()
-	
+
+func loadLevelSelect():
+	SignalBus.updateGameState.emit(Global.GameState.LEVELSELECT)
+	unloadLevel()
+	hideUIs()
+	levelselect.show()
+
 func loadCredits():
 	SignalBus.updateGameState.emit(Global.GameState.CREDITS)
 	unloadLevel()

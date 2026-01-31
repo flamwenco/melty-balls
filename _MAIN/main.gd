@@ -10,6 +10,7 @@ func _ready():
 	#start listening for signals to load level or main menu
 	SignalBus.loadLevel.connect(sceneManager.loadLevel)
 	SignalBus.loadMainMenu.connect(sceneManager.loadMainMenu)
+	SignalBus.loadLevelSelect.connect(sceneManager.loadLevelSelect)
 	SignalBus.loadCredits.connect(sceneManager.loadCredits)
 	SignalBus.loadLicenses.connect(sceneManager.loadLicenses)
 	SignalBus.loadVictory.connect(sceneManager.loadVictory)

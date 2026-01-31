@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgdl3rdft4y75"]
+[gd_scene format=3 uid="uid://dgdl3rdft4y75"]
 
 [ext_resource type="Theme" uid="uid://cnh7h68snirln" path="res://UI/ui_theme.tres" id="1_0sy5l"]
 [ext_resource type="Script" uid="uid://dbe0odefsuobw" path="res://UI/ui_mainmenu.gd" id="1_ce80c"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfk8ielw3cgwd" path="res://Assets/Sprites/lilguys/lil-guys1.png" id="2_17fjn"]
 [ext_resource type="Texture2D" uid="uid://bmlb03gva17hk" path="res://Assets/Sprites/lilguys/lil-guys3.png" id="3_0sy5l"]
 
-[node name="UiMainmenu" type="Control"]
+[node name="UiMainmenu" type="Control" unique_id=2088107507]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_vertical = 2
 theme = ExtResource("1_0sy5l")
 script = ExtResource("1_ce80c")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=23091901]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,20 +24,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=945911645]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 2
 texture = ExtResource("2_0sy5l")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1096173673]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=888302366]
 layout_mode = 2
 alignment = 1
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=175528829]
 custom_minimum_size = Vector2(800, 145)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
@@ -45,19 +45,25 @@ text = "START GAME"
 icon = ExtResource("2_17fjn")
 expand_icon = true
 
-[node name="CreditsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="LevelSelectButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1211130055]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "LEVEL SELECT"
+expand_icon = true
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=767124592]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "CREDITS"
 expand_icon = true
 
-[node name="LicensesButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="LicensesButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=854595815]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "LICENSES"
 expand_icon = true
 
-[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=411970408]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
@@ -67,6 +73,7 @@ icon_alignment = 2
 expand_icon = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LicensesButton" to="." method="_on_licenses_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
