@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2r7ydt8gcvsr" path="res://UI/ui_levelselect.gd" id="1_m5b1w"]
 [ext_resource type="Theme" uid="uid://cnh7h68snirln" path="res://UI/ui_theme.tres" id="1_voh7e"]
+[ext_resource type="Texture2D" uid="uid://b4m0urdrc1tk6" path="res://Assets/Art/rolypolysnowy-title.png" id="3_6u026"]
 
 [node name="UiLevelselect" type="Control" unique_id=421965027]
 layout_mode = 3
@@ -20,6 +21,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=1387873971]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+texture = ExtResource("3_6u026")
 
 [node name="bg_color" type="ColorRect" parent="MarginContainer" unique_id=2045891971]
 layout_mode = 2

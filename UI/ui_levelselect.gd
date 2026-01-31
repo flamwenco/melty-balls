@@ -13,9 +13,6 @@ func _ready() -> void:
 	and adds them to the list of buttons.
 	"""
 	
-	# Uncomment to test without the adhoc node creation
-	#return
-	
 	# We basically only care about the level numbers, because that's what the loader cares about
 	var levels := get_level_nums()
 	
